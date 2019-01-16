@@ -110,7 +110,7 @@ function createRock(x) {
 function endGame() {
 }
 
-function moveDodger(e) {
+function moveDodger() {
   // implement me!
   /**
    * This function should call `moveDodgerLeft()`
