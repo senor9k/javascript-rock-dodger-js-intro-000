@@ -119,15 +119,34 @@ function moveDodger(e) {
    * we've declared for you above.)
    * And be sure to use the functions declared below!
    */
+     if (e.which === LEFT_ARROW) {
+       e.preventDefault()
+       moveDodgerLeft()
+       e.stopPropagation()
+     } else if (e.which === RIGHT_ARROW){
+       e.preventDefault()
+       moveDodgerRight()
+       e.stopPropagation()
+     }
 }
 
+/**
+ * This function should move DODGER to the left
+ * (mabye 4 pixels?). Use window.requestAnimationFrame()!
+ */
 function moveDodgerLeft() {
   // implement me!
-  /**
-   * This function should move DODGER to the left
-   * (mabye 4 pixels?). Use window.requestAnimationFrame()!
-   */
-}
+   window.requestAnimationFrame(step)
+   var left = positionToInteger(DODGER.style.left)
+  //  alert(left)
+
+   function step() {
+       if (left > 0) {
+         DODGER.style.left = `${left -= 4}px`
+         window.requestAnimationFrame(step)
+       }
+    }
+ }
 
 function moveDodgerRight() {
   // implement me!
@@ -135,6 +154,17 @@ function moveDodgerRight() {
    * This function should move DODGER to the right
    * (mabye 4 pixels?). Use window.requestAnimationFrame()!
    */
+  //  var dodgerSize = GAME_WIDTH - (2 * left)
+  window.requestAnimationFrame(step)
+  var left = positionToInteger(DODGER.style.left)
+  // alert(left)
+
+  function step() {
+       if (left < (GAME_WIDTH - 40) ) {
+        DODGER.style.left = `${left += 4}px`
+        window.requestAnimationFrame(step)
+       }
+    }
 }
 
 /**
@@ -146,7 +176,10 @@ function positionToInteger(p) {
 }
 
 function start() {
-  window.addEventListener('keydown', moveDodger)
+
+  window.addEventListener('keydown', function(e) {
+    moveDodger(e)
+  })
 
   START.style.display = 'none'
 
